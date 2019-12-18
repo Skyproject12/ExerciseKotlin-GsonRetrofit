@@ -23,6 +23,7 @@ object RetrofitClient {
             chain.proceed(request)
         }.build()
 
+    // akan di panggil di dalam activity ketika ingin menjalankan api interface
     val instance: Api by lazy{
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)

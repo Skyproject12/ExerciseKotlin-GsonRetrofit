@@ -1,11 +1,13 @@
 package com.example.globefly.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.globefly.Api.RetrofitClient
 import com.example.globefly.Model.DefaultResponse
 import com.example.globefly.R
+import com.example.globefly.Storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +18,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // make click to intent login activity
+        text_login.setOnClickListener{
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+        }
 
         // make onclick
         button_signup.setOnClickListener {
@@ -63,6 +70,15 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
+        }
+    }
+
+    override fun onStart() {
+        // check status apkah sudah login atau belum
+        super.onStart()
+        if(SharedPrefManager.getInstance(this).isLoggedIn){
+            val intent= Intent(applicationContext, ProfilActiviy::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -2,12 +2,13 @@ package com.example.globefly.Api
 
 
 import com.example.globefly.Model.DefaultResponse
+import com.example.globefly.Model.LoginResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface Api{
+interface Api {
     // get response api
     @FormUrlEncoded
     @POST("createuser")
@@ -17,6 +18,13 @@ interface Api{
         @Field("password") password: String,
         @Field("name") name: String,
         @Field("school") school: String
-    // call name response yang akan digunakan
+        // call name response yang akan digunakan
     ): Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @POST("userlogin")
+    fun userLogin(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Call<LoginResponse>
 }
